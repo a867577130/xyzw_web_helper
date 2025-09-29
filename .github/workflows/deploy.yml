@@ -15,14 +15,17 @@ jobs:
           node-version: 18 # 匹配项目要求的Node版本（≥16.0.0）
           cache: 'npm' # 缓存npm依赖，加速安装
       
+      # 原有“安装依赖”步骤
       - name: 安装依赖
-        run: npm install # 安装项目依赖
-        # 新增步骤：给 Vite 加可执行权限
+  run: npm install
+
+# 新增步骤：给 Vite 加可执行权限
 - name: 赋予 Vite 可执行权限
   run: chmod +x node_modules/.bin/vite
-      
-      - name: 构建生产版本
-        run: npm run build # 执行构建，生成dist文件夹（静态网页文件）
+
+# 原有“构建生产版本”步骤
+- name: 构建生产版本
+  run: npm run build
       
       - name: 部署到GitHub Pages
         uses: peaceiris/actions-gh-pages@v4 # 专业GH Pages部署工具
