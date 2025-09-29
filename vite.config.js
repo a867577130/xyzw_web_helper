@@ -4,6 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
+  base: '/xyzw_web_helper/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
