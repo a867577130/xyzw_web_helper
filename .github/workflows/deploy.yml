@@ -25,7 +25,7 @@ jobs:
 
 # 原有“构建生产版本”步骤
 - name: 构建生产版本
-  run: npm run build
+   run: npx vite build
       
       - name: 部署到GitHub Pages
         uses: peaceiris/actions-gh-pages@v4 # 专业GH Pages部署工具
