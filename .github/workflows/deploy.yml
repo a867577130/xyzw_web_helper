@@ -1,0 +1,29 @@
+name: 自动部署到GitHub Pages
+on:
+  push:
+    branches: [ main ] # 监听main分支推送，推送即触发部署
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 使用Ubuntu系统运行部署任务
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4 # 从GitHub拉取当前仓库代码
+      
+      - name: 配置Node环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # 匹配项目要求的Node版本（≥16.0.0）
+          cache: 'npm' # 缓存npm依赖，加速安装
+      
+      - name: 安装依赖
+        run: npm install # 安装项目依赖
+      
+      - name: 构建生产版本
+        run: npm run build # 执行构建，生成dist文件夹（静态网页文件）
+      
+      - name: 部署到GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4 # 专业GH Pages部署工具
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub自动生成令牌，无需手动配置
+          publish_dir: ./dist # 部署dist文件夹下的静态文件
+          publish_branch: gh-pages # 部署到gh-pages分支（自动创建）
