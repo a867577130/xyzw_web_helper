@@ -17,6 +17,9 @@ jobs:
       
       - name: 安装依赖
         run: npm install # 安装项目依赖
+        # 新增步骤：给 Vite 加可执行权限
+- name: 赋予 Vite 可执行权限
+  run: chmod +x node_modules/.bin/vite
       
       - name: 构建生产版本
         run: npm run build # 执行构建，生成dist文件夹（静态网页文件）
